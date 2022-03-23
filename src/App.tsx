@@ -1,25 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import Accordion from "./components/Accordion/Accordion";
-import {Reting} from "./components/Reting/Reting";
+import {Rating} from "./components/Reting/Rating";
+import {UncontrolOnOff} from "./components/OnOff/UncontrolOnOff";
+import {UncontrolAccordion} from './components/Accordion/UncontrolAccordion';
+import {Accordion} from './components/Accordion/Accordion';
+import {retingValuesType, UncontrolReting} from "./components/Reting/UncontrolReting";
+import {ControlOnOff} from "./components/OnOff/ControlOnOff";
 
 function App() {
-    console.log('App rendering')
+    let [ratingValue, setRatingValue] = useState<retingValuesType>(0)
+    let [accordCollapsed, setAccordCollapsed] = useState<boolean>(false)
+    let [on, setOn] = useState(false)
+
     return (
-        <div>
-            {/*<PageTitle title={'This is a APP component'}/>*/}
-            {/*<PageTitle title={'My friends'}/>*/}
-            {/*Article 1*/}
-            {/*<Reting value={3}/>*/}
-            <Accordion titleValue={'Menprops.u'} collapsed={false}/>
-            <Accordion titleValue={'Users'} collapsed={true}/>
-            {/*<Reting value={0}/>*/}
-            {/*<Reting value={1}/>*/}
-            {/*<Reting value={2}/>*/}
-            {/*<Reting value={3}/>*/}
-            {/*<Reting value={4}/>*/}
-            {/*<Reting value={5}/>*/}
-        </div>
+      <div className={'App'}>
+          <UncontrolOnOff onChange={setOn}/>
+          {on.toString()}
+          <ControlOnOff on={on} setOn={setOn}/>
+
+          <Accordion titleValue={'menu'} /*контролируемый*/
+                     collapsed={accordCollapsed}
+                     onChange={()=>{setAccordCollapsed(!accordCollapsed)}}/>
+          <UncontrolAccordion titleValue={'Users'}/>{/*неконтролируемый компонент*/}
+
+          <Rating value={ratingValue} onClick={setRatingValue}/>{/*контролируемый*/}
+          <UncontrolReting/>
+      </div>
     );
 }
 
@@ -28,8 +34,7 @@ type PageTitlePropsType = {
 }
 
 function PageTitle(props: PageTitlePropsType) {
-    console.log('PageTitle rendering')
-    return <h1>{props.title}</h1>
+    return <h3>{props.title}</h3>
 }
 
 export default App;
