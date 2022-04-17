@@ -8,6 +8,7 @@ import {retingValuesType, UncontrolReting} from "./components/Reting/UncontrolRe
 import {ControlOnOff} from "./components/OnOff/ControlOnOff";
 import {UncontroledInput} from "./components/Inputs/UncontroledInput";
 import {СontroledCheckBox, СontroledInput, СontroledSelect} from "./components/Inputs/СontroledInput";
+import {Example1} from "./components/ReacrMemo";
 
 function App() {
     const [ratingValue, setRatingValue] = useState<retingValuesType>(0)
@@ -20,6 +21,7 @@ function App() {
 
     return (
       <div className={'App'}>
+          <Example1/>
           <UncontroledInput/>
           <СontroledInput/>
           <СontroledSelect/>
